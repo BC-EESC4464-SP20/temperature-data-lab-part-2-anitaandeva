@@ -3,6 +3,7 @@
 
 %% 1. Load in a list of all 18 stations and their corresponding latitudes and longitudes
 load GlobalStationsLatLon.mat
+
 %% 2. Calculate the linear temperature trends over the historical observation period for all 18 station
 % You will do this using a similar approach as in Part 1 of this lab, but
 % now implementing the work you did last week within a function that you
@@ -14,8 +15,6 @@ RecentYear = 1960; %you can see how your results change if you vary this value
 %Initialize arrays to hold slope and intercept values calculated for all stations
 P_all = NaN(length(sta),2); %example of how to do this for the full observational period
 %<-- do the same thing just for values from RecentYear to today
-P_recent= NaN(length(sta),2)
-
 P_recent = NaN(length(sta),2);
 
 %Use a for loop to calculate the linear trend over both the full
@@ -29,7 +28,6 @@ for i = 1:length(sta)
     P_recent(i,:)=b;
 end
 
-    
 %% 3a. Plot a global map of station locations
 %Example code, showing how to plot the locations of all 18 stations
 figure(1); clf
