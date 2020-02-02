@@ -14,12 +14,13 @@ RecentYear = 1960; %you can see how your results change if you vary this value
 %Initialize arrays to hold slope and intercept values calculated for all stations
 P_all = NaN(length(sta),2); %example of how to do this for the full observational period
 %<-- do the same thing just for values from RecentYear to today
-
+P_recent= NaN(length(sta),2)
 %Use a for loop to calculate the linear trend over both the full
 %observational period and the time from RecentYear (i.e. 1960) to today
 %using the function StationTempObs_LinearTrend
 %<--
 
+    
 %% 3a. Plot a global map of station locations
 %Example code, showing how to plot the locations of all 18 stations
 figure(1); clf
