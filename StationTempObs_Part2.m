@@ -14,9 +14,7 @@ RecentYear = 1960; %you can see how your results change if you vary this value
 %Initialize arrays to hold slope and intercept values calculated for all stations
 P_all = NaN(length(sta),2); %example of how to do this for the full observational period
 %<-- do the same thing just for values from RecentYear to today
-P_recent= NaN(length(sta),2)
-
-P_recent = NaN(length(sta),2);
+P_recent= NaN(length(sta),2);
 
 %Use a for loop to calculate the linear trend over both the full
 %observational period and the time from RecentYear (i.e. 1960) to today
@@ -44,7 +42,15 @@ title('Locations of stations with observational temperature data')
 %to plot symbols for all 18 stations colored by the rate of temperature
 %change from RecentYear to present (i.e. the slope of the linear trendline)
 %<--
-
+figure(2);clf
+worldmap('World')
+load coastlines
+plotm(coastlat,coastlon)
+slope_recent=P_recent(:,1)
+scatterm(lat,lon,50,slope_recent,'filled')
+legend('rate of temperature change')
+colorbar
+title('Rate of Temperature Change at Different Locations')
 %% Extension option: again using scatterm, plot the difference between the
 %local rate of temperature change (plotted above) and the global mean rate
 %of temperature change over the same period (from your analysis of the
@@ -61,6 +67,16 @@ title('Locations of stations with observational temperature data')
 %Use the function StationModelProjections to loop over all 18 stations to
 %extract the linear rate of temperature change over the 21st century at
 %each station
+P = NaN(length(sta),2);
+baseline_model= NaN(length(sta),2);
+
+for i = 1:length(sta)
+    [c,d] =StationModelProjections(sta(i));
+    P(i,:)=c;
+    baseline_model(i,:)=d;
+end
+
+
 % Initialize arrays to hold all the output from the for loop you will write
 % below
 %<--

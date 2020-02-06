@@ -65,6 +65,6 @@ anomly=amtemp-tempMean
 movemean=movmean(anomly,5)
  
 %% Calculate the linear trend in temperature this station over the modeled 21st century period
-P= polyfit(year,anomly,1)
- 
+ %<--
+
 end
