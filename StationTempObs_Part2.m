@@ -155,9 +155,13 @@ title('the year of emergence of the long-term tempertaure signal from the baseli
 %shows the smoothed temperature anomaly at all 18 stations.
 %%
 figure(6);clf
-
 for s=1:18
-   plot(year,movemean(:,s))
-   legend(show) 
+   plot(year,movemean(:,s),'color',rand(1,3))
+   legendCell{s}=num2str(sta(s))
+   legend(legendCell)
    hold on
 end
+legend('location','northwest')
+title('Smoothed temperature anomaly at all 18 stations (5 years movemean)')
+xlabel('year')
+ylabel('temperature anomaly (degree celsius)')
