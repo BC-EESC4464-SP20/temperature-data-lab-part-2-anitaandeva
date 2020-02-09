@@ -131,6 +131,7 @@ title('interannual variability in annual mean temperature at each station (2005-
 %temperatures from the baseline period
 %<--
 
+%change
 P(:,1)./vari>2
 
 twovari=2*vari
