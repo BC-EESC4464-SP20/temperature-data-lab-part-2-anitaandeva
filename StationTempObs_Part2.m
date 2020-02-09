@@ -46,7 +46,7 @@ figure(2);clf
 worldmap('World')
 load coastlines
 plotm(coastlat,coastlon)
-slope_recent=P_recent(:,1)*10
+slope_recent=P_recent(:,1)*10;
 scatterm(lat,lon,100,slope_recent,'filled')
 colorbar
 title('Rate of Temperature Change at Different Locations (degrees Celsius per decade')
@@ -66,7 +66,7 @@ title('Rate of Temperature Change at Different Locations (degrees Celsius per de
 %Use the function StationModelProjections to loop over all 18 stations to
 %extract the linear rate of temperature change over the 21st century at
 %each station
-[~,~,~,~,year]=StationModelProjections(sta(1))
+[~,~,~,~,year]=StationModelProjections(sta(1));
 
 P = NaN(length(sta),2);
 baseline_model= NaN(length(sta),2);
@@ -109,7 +109,7 @@ title('Rate of projected temperature change from 2006 to 2099 (degrees Celsius p
 %as determined by the baseline standard deviation of the temperatures from
 %2005 to 2025
 %<--
-vari=baseline_model(:,2)
+vari=baseline_model(:,2);
 figure(4);clf
 worldmap('World')
 load coastlines
@@ -157,7 +157,7 @@ title('the year of emergence of the long-term tempertaure signal from the baseli
 figure(6);clf
 for s=1:18
    plot(year,movemean(:,s),'color',rand(1,3))
-   legendCell{s}=num2str(sta(s))
+   legendCell{s}=num2str(sta(s));
    legend(legendCell)
    hold on
 end
