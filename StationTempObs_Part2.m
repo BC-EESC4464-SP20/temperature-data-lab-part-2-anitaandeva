@@ -131,11 +131,12 @@ title('interannual variability in annual mean temperature at each station (2005-
 %temperatures from the baseline period
 %<--
 
+Sig_Noise = P(:,1)./vari>2
 
-twovari=2*vari
-temp_emge=twovari+temp_2006
-year_emge=(temp_emge-P(:,2))./P(:,1)
-year_emergence=ceil(year_emge)
+%twovari=2*vari
+%temp_emge=twovari+temp_2006
+%year_emge=(temp_emge-P(:,2))./P(:,1)
+%year_emergence=ceil(year_emge)
 
 
 %Plot a global map showing the year of emergence

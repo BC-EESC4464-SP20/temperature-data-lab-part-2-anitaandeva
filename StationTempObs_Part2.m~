@@ -131,6 +131,7 @@ title('interannual variability in annual mean temperature at each station (2005-
 %temperatures from the baseline period
 %<--
 
+P(:,1)./vari>2
 
 % twovari=2*vari
 % temp_emge=twovari+temp_2006
@@ -162,7 +163,11 @@ title('the year of emergence of the long-term tempertaure signal from the baseli
 figure(6);clf
 for s=1:18
    plot(year,movemean(:,s),'color',rand(1,3))
+<<<<<<< HEAD
    legendCell{s}=num2str(sta(s));
+=======
+   legendCell{s}=num2str(sta(s))
+>>>>>>> 08b27bba8fadfa12b7fc766bda789e85bb640f4e
    legend(legendCell)
    hold on
 end
