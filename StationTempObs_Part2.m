@@ -115,7 +115,6 @@ worldmap('World')
 load coastlines
 plotm(coastlat,coastlon)
 scatterm(lat,lon,100,vari,'filled')
-legend('interannual variability in annual mean temperature at each station')
 colorbar
 title('interannual variability in annual mean temperature at each station (2005-2025)')
 
@@ -131,11 +130,10 @@ title('interannual variability in annual mean temperature at each station (2005-
 %temperatures from the baseline period
 %<--
 
-
-%twovari=2*vari
-%temp_emge=twovari+temp_2006
-%year_emge=(temp_emge-P(:,2))./P(:,1)
-%year_emergence=ceil(year_emge)
+twovari=2*vari
+temp_emge= twovari./ P(:,1)
+year_emge= temp_emge+2006
+year_emergence=ceil(year_emge)
 
 
 %Plot a global map showing the year of emergence
