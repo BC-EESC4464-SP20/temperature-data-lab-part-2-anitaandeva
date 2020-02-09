@@ -1,4 +1,4 @@
-function [baseline_model, P] = StationModelProjections(station_number)
+function [baseline_model,P,temp_2006,movemean,year] = StationModelProjections(station_number)
 
 % StationModelProjections Analyze modeled future temperature projections at individual stations
 %===================================================================
@@ -41,6 +41,7 @@ filename = ['model' num2str(station_number) '.csv'];
 stationdata=readtable(filename);
 year=table2array(stationdata(:,1))
 amtemp=table2array(stationdata(:,2))
+temp_2006=table2array(stationdata(1,2))
 
 %% Calculate the mean and standard deviation of the annual mean temperatures
 %  over the baseline period over the first 20 years of the modeled 21st
@@ -65,6 +66,6 @@ anomly=amtemp-tempMean
 movemean=movmean(anomly,5)
  
 %% Calculate the linear trend in temperature this station over the modeled 21st century period
-P= polyfit(year,anomly,1)
+P= polyfit(year,amtemp,1)
  
 end

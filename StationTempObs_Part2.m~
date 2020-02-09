@@ -46,11 +46,10 @@ figure(2);clf
 worldmap('World')
 load coastlines
 plotm(coastlat,coastlon)
-slope_recent=P_recent(:,1)
-scatterm(lat,lon,50,slope_recent,'filled')
-legend('rate of temperature change')
+slope_recent=P_recent(:,1)*10
+scatterm(lat,lon,100,slope_recent,'filled')
 colorbar
-title('Rate of Temperature Change at Different Locations')
+title('Rate of Temperature Change at Different Locations (degrees Celsius per decade')
 %% Extension option: again using scatterm, plot the difference between the
 %local rate of temperature change (plotted above) and the global mean rate
 %of temperature change over the same period (from your analysis of the
@@ -67,13 +66,19 @@ title('Rate of Temperature Change at Different Locations')
 %Use the function StationModelProjections to loop over all 18 stations to
 %extract the linear rate of temperature change over the 21st century at
 %each station
+[~,~,~,~,year]=StationModelProjections(sta(1))
+
 P = NaN(length(sta),2);
 baseline_model= NaN(length(sta),2);
+temp_2006= NaN(length(sta),1);
+movemean= NaN(length(year),length(sta));
 
 for i = 1:length(sta)
-    [a,b] =StationModelPro(sta(i));
-    P_all(i,:)=a;
-    P_recent(i,:)=b;
+    [c,d,e,f,g] =StationModelProjections(sta(i));
+    P(i,:)=d;
+    baseline_model(i,:)=c;
+    temp_2006(i)=e;
+    movemean(:,i)=f;
 end
 
 
@@ -91,10 +96,28 @@ end
 %% 5. Plot a global map of the rate of temperature change projected at each station over the 21st century
 %<--
 
+figure(3);clf
+worldmap('World')
+load coastlines
+plotm(coastlat,coastlon)
+scatterm(lat,lon,100,10*P(:,1),'filled')
+colorbar
+title('Rate of projected temperature change from 2006 to 2099 (degrees Celsius per decade)')
+
+
 %% 6a. Plot a global map of the interannual variability in annual mean temperature at each station
 %as determined by the baseline standard deviation of the temperatures from
 %2005 to 2025
 %<--
+vari=baseline_model(:,2)
+figure(4);clf
+worldmap('World')
+load coastlines
+plotm(coastlat,coastlon)
+scatterm(lat,lon,100,vari,'filled')
+legend('interannual variability in annual mean temperature at each station')
+colorbar
+title('interannual variability in annual mean temperature at each station (2005-2025)')
 
 %% 6b-c. Calculate the time of emergence of the long-term change in temperature from local variability
 %There are many ways to make this calcuation, but here we will compare the
@@ -108,5 +131,33 @@ end
 %temperatures from the baseline period
 %<--
 
+
+twovari=2*vari
+temp_emge=twovari+temp_2006
+year_emge=(temp_emge-P(:,2))./P(:,1)
+year_emergence=ceil(year_emge)
+
+
 %Plot a global map showing the year of emergence
 %<--
+figure(5);clf
+worldmap('World')
+load coastlines
+plotm(coastlat,coastlon)
+scatterm(lat,lon,100,year_emergence,'filled')
+colorbar
+title('the year of emergence of the long-term tempertaure signal from the baseline nautral variability')
+
+
+%Extension:modify the StationTemp_ObsLinear Trend
+%function/StationModelProjections function to also give you the smoothed
+%temperature anomaly for each station, and use this to create a plot that
+%shows the smoothed temperature anomaly at all 18 stations.
+%%
+figure(6);clf
+
+for s=1:18
+   plot(year,movemean(:,s))
+   legend('s') 
+   hold on
+end
