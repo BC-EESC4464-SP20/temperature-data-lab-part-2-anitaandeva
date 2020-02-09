@@ -131,6 +131,7 @@ title('interannual variability in annual mean temperature at each station (2005-
 %temperatures from the baseline period
 %<--
 
+P(:,1)./vari>2
 
 twovari=2*vari
 temp_emge=twovari+temp_2006
@@ -156,8 +157,12 @@ title('the year of emergence of the long-term tempertaure signal from the baseli
 %%
 figure(6);clf
 for s=1:18
-   plot(year,movemean(:,s),) 
+   plot(year,movemean(:,s),'color',rand(1,3))
    legendCell{s}=num2str(sta(s))
    legend(legendCell)
    hold on
 end
+legend('location','northwest')
+title('Smoothed temperature anomaly at all 18 stations (5 years movemean)')
+xlabel('year')
+ylabel('temperature anomaly (degree celsius)')
